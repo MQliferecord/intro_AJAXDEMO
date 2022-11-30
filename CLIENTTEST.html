@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./bootstrap.min.css">
+    <script src="./jquery-3.6.1.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h2 class="page-header">JQUERY发送AJAX请求</h2>
+        <button type="button" class="btn btn-primary">GET</button>
+        <button type="button" class="btn btn-danger">POST</button>
+        <button type="button" class="btn btn-info">通用型方法ajax</button>
+    </div>
+    <script>
+        $('button').eq(0).click(function(){
+            $.get('http://127.0.0.1:8000/jquery',{a:100,b:200},function(data){
+                console.log(data);
+            },'json')
+        })
+        $('button').eq(1).click(function(){
+            $.post('http://127.0.0.1:8000/jquery',{a:100,b:200},function(data){
+                console.log(data);
+            },'json')
+        })
+        $('button').eq(2).click(function(){
+            $.ajax({
+                url:'http://127.0.0.1:8000/delay',
+                data:{a:100,b:200},
+                type:'GET',
+                dataType:'json',
+                success:function(data){
+                    console.log(data);
+                },
+                error:function(){
+                    alert('出错了')
+                },
+                timeout:2000,      
+            })
+        })
+        
+    </script>
+</body>
+</html>

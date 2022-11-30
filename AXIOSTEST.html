@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <h2 class="page-header">AXIOS发送AJAX请求</h2>
+        <button type="button" class="btn btn-primary">GET</button>
+        <button type="button" class="btn btn-danger">POST</button>
+        <button type="button" class="btn btn-info">AJAX</button>
+    </div>
+    <script>
+        const btn = document.querySelectorAll('button');
+        axios.defaults.baseURL = 'http://127.0.0.1:8000';
+        btn[0].onclick = function () {
+            axios.get('/axios', {
+                params: {
+                    id: 100,
+                    vip: 7
+                },
+                headers: {
+                    age: 20
+                }
+            }).then(value => {
+                console.log(value.data);
+            })
+        };
+        btn[1].onclick = function () {
+            axios.post('/axios',
+                {
+                    username: 'admin',
+                    password: 'admin'
+                },
+                {
+                    params: {
+                        id: 200,
+                        vip: 9
+                    },
+                    headers: {
+                        age: 20
+                    },
+                }).then(value => {
+                    console.log(value);
+                })
+        };
+        btn[2].onclick = function () {
+            axios({
+                method: 'post',
+                url:'/axios',
+                params: {
+                    id: 200,
+                    vip: 9
+                },
+                headers: {
+                    age: 20
+                },
+                data:{
+                    username: 'admin',
+                    password: 'admin'
+                }
+            }).then(value => {
+                console.log(value);
+            })
+        }
+
+    </script>
+</body>
+
+</html>
